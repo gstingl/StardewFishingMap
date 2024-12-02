@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="script.js"></script>
 <link rel="Stylesheet" href="style.css">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +7,27 @@
     <title>Stardew Valley Fishing Map</title>
 </head>
 <body>
-    
+    <img class="logo" src="/images/logo.png">
+    <div class="menu">
+        <select name="Weather" id="weatherSelect" size="1">
+            <option>Sun</option>
+            <option>Rain</option>
+            <option>Any</option>
+        </select>
+        <div class="fishButton">
+        <h1>Pick the Weather and Season</h1>
+        <button type="submit">Go Fish!</button></button>
+        </div>
+        <select name="Season" id="seasonSelect" size="1">
+            <option>Spring</option>
+            <option>Summer</option>
+            <option>Fall</option>
+            <option>Winter</option>
+            <option>Any</option>
+        </select>
+    </div>
+    <div id="fishBox"></div>
+    <img class="map" src="/images/world_map.webp"></img>
 </body>
+<script src="script.js"></script>
 </html>

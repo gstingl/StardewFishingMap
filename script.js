@@ -3,49 +3,50 @@
 
 let currentSeason = 'summer';
 let currentWeather = 'sun';
-let catchableFishSeason = [];
+let fishableFish = [];
 
 //first check if any fish in the 'fish' array have properties that match the
 // current season or weather.
 
+
 const fishList = {
-    'puffer fish': {
-        location: ['ocean', 'ginger island oceans'],
-        minTime: 12,
-        maxTime: 16,
+    PufferFish: {
+        location: ['Ocean', 'Ginger Island Oceans'],
+        minTime: '12PM',
+        maxTime: '4PM',
         season: 'summer',
         weather: 'sun',
 },
     anchovy: {
-        location: 'ocean',
-        minTime: 0,
-        maxTime: 24,
+        location: 'Ocean',
+        minTime: '6AM',
+        maxTime: '12AM',
         season: ['spring', 'fall'],
         weather: 'any',
 },
     tuna: {
-        location: ['ocean', 'ginger island oceans'],
-        minTime: 6,
-        maxTime: 19,
+        location: ['Ocean', 'Ginger Island Oceans'],
+        minTime: '6AM',
+        maxTime: '7PM',
         season: ['summer', 'winter'],
         weather: 'any',
 },
     sardine: {
-        location: 'ocean',
-        minTime: 6,
-        maxTime: 19,
+        location: 'Ocean',
+        minTime: '6AM',
+        maxTime: '7PM',
         season: ['spring', 'fall', 'winter'],
         weather: 'any',
 },
     bream: {
-        location: ['river_town', 'river_forest'],
-        minTime: 6,
-        maxTime: 2,
+        location: ['River Town', 'River Forest'],
+        minTime: '6AM',
+        maxTime: '2AM',
         season: 'any',
         weather: 'any',
 }};
 
-
+//Checks fish properties are string or array and then checks if it matches the variable for season
 const seasonCheck = (fishName) => {
     if (typeof fishList[fishName].season === 'string') {
         if (fishList[fishName].season === currentSeason || fishList[fishName].season === 'any') {
@@ -58,6 +59,7 @@ const seasonCheck = (fishName) => {
     };
 };
 
+//Checks fish properties are string or array and then checks if it matches the variable for weather
 const weatherCheck = (fishName) => {
     if (typeof fishList[fishName].weather === 'string') {
         if (fishList[fishName].weather === currentWeather || fishList[fishName].weather === 'any') {
@@ -70,14 +72,35 @@ const weatherCheck = (fishName) => {
     };
 };
 
-
-for(let fishName in fishList) {
+//Checks that both season and weather check are true and returns fish names
+function fishSearch() {for(let fishName in fishList) {
     if(weatherCheck(fishName) === true && seasonCheck(fishName) === true) {
-        console.log(fishName);
-    }
+        fishableFish.push(fishName);
+        const newFishObjects = {...fishableFish};
+}}};
+
+fishSearch();
+
+function convertFish() {
+    const newFishObjectList = {...fishableFish};
+    return newFishObjectList;
 };
 
+const fishDisplay = Object.values(convertFish()).reduce((accum, currKey) => accum +
+    `<div class="fish">
+    <div class="fish_name">Type: ${currKey}</div>
+    <div class="location">Location: ${fishList[currKey].location.join(', ')}</div>
+    <div class="time">Time: ${fishList[currKey].minTime} to ${fishList[currKey].maxTime}</div>
+    <img class="fishThumbnail" src="/images/fish/${currKey}.png">
+  </div>`, '');
 
+document.getElementById('fishBox').innerHTML = fishDisplay;
 
+/*
+const runCalc = document.querySelector('button');
+runCalc.addEventListener('click', function fishSearch() {
+    convertFish();
+    fishDisplay();
+});
 
-
+*/
